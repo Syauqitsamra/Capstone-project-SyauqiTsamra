@@ -23,12 +23,35 @@ class Perpustakaan:
     def tambah_buku(self, title, author, release_date, price):
         existing_book = next((key for key, value in self.buku.items() if value['Title'] == title), None)
 
+       import datetime
+
+class Perpustakaan:
+    def __init__(self):
+        self.buku = {
+            '001': {'Title': "A Game of Thrones", 'Author': 'George R. R. Martin', 'Release date': '1996', 'Price': 20000},
+            '002': {'Title': "Harry Potter and the Chamber of Secrets", 'Author': 'J.K. Rowling', 'Release date': '1998', 'Price': 15000},
+            '003': {'Title': "Harry Potter and the Philosopher's Stone", 'Author': 'J.K. Rowling', 'Release date': '1999', 'Price': 25000},
+            '004': {'Title': "Harry Potter and the Prisoner of Azkaban", 'Author': 'J.K. Rowling', 'Release date': '1997', 'Price': 15000},
+            '005': {'Title': "A Storm of Swords", 'Author': 'George R. R. Martin', 'Release date': '2000', 'Price': 15000},
+            '006': {'Title': "Dune", 'Author': 'Frank Herbert', 'Release date': '1965', 'Price': 30000},
+            '007': {'Title': "The Lord of the Rings", 'Author': 'J.R.R. Tolkien', 'Release date': '1954', 'Price': 40000},
+            '008': {'Title': "Fight Club", 'Author': 'Chuck Palahniuk', 'Release date': '1996', 'Price': 15000},
+            '009': {'Title': "Battle Royale", 'Author': 'Koushun Takami', 'Release date': '1999', 'Price': 15000},
+            '010': {'Title': "The Green Mile", 'Author': 'Stephen King', 'Release date': '1996', 'Price': 20000},
+        }
+        self.next_book_id = int(max(self.buku, key=lambda x: int(x))) + 1 if self.buku else 1
+        self.membership_discount = 0.2
+
+    def generate_book_id(self):
+        return '{:03}'.format(self.next_book_id)
+
+    def tambah_buku(self, title, author, release_date, price):
+        existing_book = next((key for key, value in self.buku.items() if value['Title'] == title), None)
+
         if existing_book:
-            # Buku sudah ada, tambahkan stok
             print(f"Buku dengan judul {title} sudah ada di perpustakaan.")
             return existing_book
         else:
-            # Buku belum ada, tampilkan konfirmasi
             print("\nDetail Buku yang Akan Ditambahkan:")
             print(f"Title: {title}")
             print(f"Author: {author}")
@@ -38,7 +61,6 @@ class Perpustakaan:
             confirm = input("Apakah Anda yakin ingin menambahkan buku ini? (Y/N): ").upper()
 
             if confirm == 'Y':
-                # Tambahkan buku baru
                 book_id = self.generate_book_id()
                 self.next_book_id += 1
 
@@ -71,7 +93,6 @@ class Perpustakaan:
                     book_id, info['Title'], info['Author'], info['Release date'], info['Price']
                 ))
 
-            # Opsi sorting
             print("\nOpsi Sorting:")
             print("1. Author")
             print("2. Title")
